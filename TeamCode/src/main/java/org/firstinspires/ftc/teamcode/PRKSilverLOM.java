@@ -1,16 +1,18 @@
-//Robotics Code for Pace Academy Team #### Silver
+//Robotics Code for Pace Academy Team #### Silver - TeleOp v1
 
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.robot.Robot;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Basic: Core Driving Code - HT", group="Silver Group")
-@Disabled
+@TeleOp(name="HenryFTC", group="Silver Group")
+//@Disabled
 public class PRKSilverLOM extends LinearOpMode {
 
     // Declare OpMode members.
@@ -45,30 +47,35 @@ public class PRKSilverLOM extends LinearOpMode {
         resetEncoders();
         armModePower();
 
-		waitForStart();
+        waitForStart();
         runtime.reset();
 
         while (opModeIsActive()) {
-        	double updown = -gamepad1.left_stick_y;
-        	double rightleft = -gamepad1.right_stick_x;
-        	double pulleyValue;
-        	double moveArm;
-        	double lowJointPower = -(gamepad2.left_stick_y);
-        	double highJointPower = -(gamepad2.right_stick_y);
+            double updown = -gamepad1.left_stick_y;
+            double rightleft = -gamepad1.right_stick_x;
+            //double pulleyValue;
+            double moveArm;
+            double lowJointPower = -(gamepad2.left_stick_y);
+            double highJointPower = -(gamepad2.right_stick_y);
 
-        	if(gamepad2.right_bumper) pulleyValue=1;
-        	else if(gamepad2.left_bumper) pulleyValue=-.25;
-        	else pulleyValue=0;
-        	pulley.setPower(pulleyValue);
+            /*if(gamepad2.right_bumper) pulleyValue=1;
+            else if(gamepad2.left_bumper) pulleyValue=-.25;
+            else pulleyValue=0;
+            pulley.setPower(pulleyValue);*/
 
             if(gamepad2.dpad_left){
                 setupArmPickup();
+                sleep(1000);
             }
             else if(gamepad2.dpad_right){
                 setupArmScore();
             }
             else if(gamepad2.dpad_down){
                 armModePower();
+            }
+            else if(gamepad2.left_bumper){
+                lowJoint.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                lowJoint.setPower(0);
             }
 
             leftDrive.setPower(updown+rightleft);
@@ -104,17 +111,18 @@ public class PRKSilverLOM extends LinearOpMode {
         }
 
         public static void updatePos(){
-            lowJoint.setTargetPosition(lowPos-gp2leftY);
-            highJoint.setTargetPosition(highPos-gp2leftY);
+            lowJoint.setTargetPosition((int)((int)lowPos-(int)gp2leftY));
+            highJoint.setTargetPosition((int)((int)highPos-(int)gp2leftY));
         }
 
         public static void setupArmPickup(){
             armModePos();
             //will have to test arm to find ideal positions, power can start as .5 and see if change is necessary
-            lowJoint.setTargetPosition(1);//placeholder
-            lowJoint.setPower(1);
-            highJoint.setTargetPosition(-1);//placeholder
-            highJoint.setPower(1);
+            lowJoint.setTargetPosition(-320);//tested pos
+            lowJoint.setPower(.1);
+            
+            highJoint.setTargetPosition(285);//tested pos
+            highJoint.setPower(.1);
             armModePower();
         }
 
@@ -125,11 +133,5 @@ public class PRKSilverLOM extends LinearOpMode {
             lowJoint.setPower(1);
             highJoint.setPower(1);
             armModePower();
-        }
-        public static void reset(){
-            lowJoint.setTargetPosition(0);
-            highJoint.setTargetPosition(0);
-            lowJoint.setPower(1);
-            highJoint.setPower(1);
         }
 }
