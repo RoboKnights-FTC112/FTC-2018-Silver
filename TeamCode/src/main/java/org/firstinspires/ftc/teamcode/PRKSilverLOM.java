@@ -1,5 +1,5 @@
 //Robotics Code for Pace Academy Team #### Silver - TeleOp v1
-
+//Tim's edit
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -100,7 +100,7 @@ public class PRKSilverLOM extends LinearOpMode {
             lowJoint.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             highJoint.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
-        
+
         public static void armModePos(){
             lowJoint.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             highJoint.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -120,7 +120,7 @@ public class PRKSilverLOM extends LinearOpMode {
             //will have to test arm to find ideal positions, power can start as .5 and see if change is necessary
             lowJoint.setTargetPosition(-320);//tested pos
             lowJoint.setPower(.1);
-            
+
             highJoint.setTargetPosition(285);//tested pos
             highJoint.setPower(.1);
             armModePower();
