@@ -17,8 +17,10 @@ public class PRKSilverLOM extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
+    private DcMotor frontLeftDrive = null;
+    private DcMotor backLeftDrive = null;
+    private DcMotor frontRightDrive = null;
+    private DcMotor backRightDrive = null;
     private static DcMotor lowJoint = null;
     private static DcMotor highJoint = null;
     private DcMotor pulley = null;
@@ -33,8 +35,10 @@ public class PRKSilverLOM extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
+        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         lowJoint = hardwareMap.get(DcMotor.class, "lowJoint");
         highJoint = hardwareMap.get(DcMotor.class, "highJoint");
         leftClaw = hardwarMap.servo.get("");
@@ -44,9 +48,11 @@ public class PRKSilverLOM extends LinearOpMode {
         gp2rightY = gamepad2.right_stick_y;
 
 
-
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+//?
+        backLeftDrive.setDirection(DcMotor.Direction.FORWARD);
+        backRightDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftDrive.setDirection(DcMotor.Direction.FORWARD);
 
         resetEncoders();
         armModePower();
@@ -82,8 +88,10 @@ public class PRKSilverLOM extends LinearOpMode {
                 lowJoint.setPower(0);
             }
 
-            leftDrive.setPower(updown+rightleft);
-            rightDrive.setPower(updown-rightleft);
+            backleftDrive.setPower(updown+rightleft);
+            backrightDrive.setPower(updown-rightleft);
+            frontrightDrive.setPower(updown-rightleft);
+            frontleftDrive.setPower(updown+rightleft);
 
             if(highJoint.getMode()==DcMotor.RunMode.RUN_WITHOUT_ENCODER) highJoint.setPower(highJointPower);
             if(lowJoint.getMode()==DcMotor.RunMode.RUN_TO_POSITION&&highJoint.getMode()==DcMotor.RunMode.RUN_TO_POSITION) updatePos();
