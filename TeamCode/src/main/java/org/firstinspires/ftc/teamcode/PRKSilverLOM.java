@@ -26,6 +26,8 @@ public class PRKSilverLOM extends LinearOpMode {
     private static float gp2rightY;
     private static float lowPos;
     private static float highPos;
+    private Servo leftClaw = null;
+    private Servo rightClaw = null;
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -35,6 +37,8 @@ public class PRKSilverLOM extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         lowJoint = hardwareMap.get(DcMotor.class, "lowJoint");
         highJoint = hardwareMap.get(DcMotor.class, "highJoint");
+        leftClaw = hardwarMap.servo.get("");
+        rightClaw = hardwareMap.servo.get("");
 
         gp2leftY = gamepad2.left_stick_y;
         gp2rightY = gamepad2.right_stick_y;
