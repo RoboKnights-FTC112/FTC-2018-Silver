@@ -131,19 +131,19 @@ public class PRKSilverLOM extends LinearOpMode {
             armModePos();
             //will have to test arm to find ideal positions, power can start as .5 and see if change is necessary
             lowJoint.setTargetPosition(-320);//tested pos
-            lowJoint.setPower(.1);
+            lowJoint.setPower(.05);
 
             highJoint.setTargetPosition(285);//tested pos
-            highJoint.setPower(.1);
+            highJoint.setPower(.05);
             armModePower();
         }
 
-        public static void setupArmScore(){
+        /*public static void setupArmScore(){
             armModePos();
             lowJoint.setTargetPosition(1);//placeholder
             highJoint.setTargetPosition(-1);//placeholder
             lowJoint.setPower(1);
             highJoint.setPower(1);
             armModePower();
-        }
+        }*/
 }
