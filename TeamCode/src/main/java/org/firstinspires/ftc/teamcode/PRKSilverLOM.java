@@ -1,5 +1,4 @@
 //Robotics Code for Pace Academy Team #### Silver - TeleOp v1
-//Tim's edit
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
