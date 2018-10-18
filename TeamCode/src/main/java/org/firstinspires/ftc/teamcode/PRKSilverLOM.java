@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="HenryFTC", group="Silver Group")
+@TeleOp(name="HenryTimBlakeFTC", group="Silver Group")
 //@Disabled
 public class PRKSilverLOM extends LinearOpMode {
 
@@ -48,7 +48,6 @@ public class PRKSilverLOM extends LinearOpMode {
         gp2rightY = gamepad2.right_stick_y;
 
 
-//?
         backLeftDrive.setDirection(DcMotor.Direction.FORWARD);
         backRightDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
