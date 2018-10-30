@@ -2,6 +2,7 @@
     package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -40,8 +41,8 @@ public class PRKSilverLOM extends LinearOpMode {
         frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         lowJoint = hardwareMap.get(DcMotor.class, "lowJoint");
         highJoint = hardwareMap.get(DcMotor.class, "highJoint");
-        leftClaw = hardwarMap.servo.get("");
-        rightClaw = hardwareMap.servo.get("");
+        leftClaw = hardwareMap.servo.get("claw1");
+        rightClaw = hardwareMap.servo.get("claw2");
 
         gp2leftY = gamepad2.left_stick_y;
         gp2rightY = gamepad2.right_stick_y;
@@ -86,20 +87,27 @@ public class PRKSilverLOM extends LinearOpMode {
                 lowJoint.setPower(0);
             }
 
-            backleftDrive.setPower(updown+rightleft);
-            backrightDrive.setPower(updown-rightleft);
-            frontrightDrive.setPower(updown-rightleft);
-            frontleftDrive.setPower(updown+rightleft);
+            backLeftDrive.setPower(updown+rightleft);
+            backRightDrive.setPower(updown-rightleft);
+            frontRightDrive.setPower(updown-rightleft);
+            frontLeftDrive.setPower(updown+rightleft);
 
             if(highJoint.getMode()==DcMotor.RunMode.RUN_WITHOUT_ENCODER) highJoint.setPower(highJointPower);
             if(lowJoint.getMode()==DcMotor.RunMode.RUN_TO_POSITION&&highJoint.getMode()==DcMotor.RunMode.RUN_TO_POSITION) updatePos();
 
             lowPos = (float)lowJoint.getCurrentPosition();
             highPos = (float)highJoint.getCurrentPosition();
+            
+            leftClaw.setPosition(1);
+            //sleep(500);
+            //rightClaw.setPosition(1);
+            
+            
 
             telemetry.addData("Positions","Low Joint: " + lowPos + ", High Joint: " + highPos);
             telemetry.addData("Runtime", ""+runtime);
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftDrive.getPower(), rightDrive.getPower());
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", backLeftDrive.getPower(), backRightDrive.getPower());
+            telemetry.addData("Claw Servos", "Left: (%.2f), Right: (%.2f)", leftClaw.getPosition(), rightClaw.getPosition());
             telemetry.update();
         }
     }
@@ -136,12 +144,12 @@ public class PRKSilverLOM extends LinearOpMode {
             armModePower();
         }
 
-        /*public static void setupArmScore(){
+        public static void setupArmScore(){
             armModePos();
             lowJoint.setTargetPosition(1);//placeholder
             highJoint.setTargetPosition(-1);//placeholder
             lowJoint.setPower(1);
             highJoint.setPower(1);
             armModePower();
-        }*/
+        }
 }

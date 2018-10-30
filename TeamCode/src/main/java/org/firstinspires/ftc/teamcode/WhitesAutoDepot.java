@@ -7,16 +7,15 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
 
-public class WhitesAuto extends LinearOpMode{
+public class WhitesAutoDepot extends LinearOpMode{
     public DcMotor arm;
     public DcMotor rearLeft;
     public DcMotor rearRight;
     public DcMotor frontLeft;
     public DcMotor frontRight;
     
-    public Servo plowOne;
-    public Servo plowTwo;
-    public DcMotor plowMotor;
+    public DcMotor armLiftLeft;
+    public DcMotor armLiftLeft;
     
     public void runOpMode() {
 
@@ -66,7 +65,8 @@ public class WhitesAuto extends LinearOpMode{
     }
     public void moveArm(boolean pos){
         if(pos){
-            plowMotor.setPower(-0.6);
+            armLiftLeft.setPower(-0.6);
+            armLiftRight.setPower(-0.6);
             sleep(400);
         } else {
             plowMotor.setPower(0.6);
