@@ -2,6 +2,8 @@
     package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -11,22 +13,25 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="HenryTimBlakeFTC", group="Silver Group")
+@TeleOp(name="PaceSilverV2", group="Silver Group")
 //@Disabled
 public class PaceSilverKnightsV2 extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     //Driving motors
-    private DcMotor frontLeftDrive = null;
-    private DcMotor backLeftDrive = null;
-    private DcMotor frontRightDrive = null;
-    private DcMotor backRightDrive = null;
+    private static DcMotor frontLeftDrive = null;
+    private static DcMotor backLeftDrive = null;
+    private static DcMotor frontRightDrive = null;
+    private static DcMotor backRightDrive = null;
 
     //Arm motors
-    private DcMotor armLiftLeft = null;
-    private DcMotor armLiftRight = null;
-    private DcMotor spinner = null;
+    private static DcMotor armLiftLeft = null;
+    private static DcMotor armLiftRight = null;
+    private static DcMotor spinner = null;
+
+    //RackPinLift
+    private static DcMotor rackPinLift = null;
    
     @Override
     public void runOpMode() {
@@ -41,7 +46,8 @@ public class PaceSilverKnightsV2 extends LinearOpMode {
         armLiftLeft = hardwareMap.get(DcMotor.class, "arm_left");
         armLiftRight = hardwareMap.get(DcMotor.class, "arm_right");
 
-        spinner = hardwarMap.get(DcMotor.class, "spinner");
+        spinner = hardwareMap.get(DcMotor.class, "spinner");
+        rackPinLift = hardwareMap.get(DcMotor.class, "rack_pin");
 
         //Left drives
         frontLeftDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -75,6 +81,13 @@ public class PaceSilverKnightsV2 extends LinearOpMode {
                 keepPosition();
             }
 
+            if(gamepad1.right_bumper)
+                rackPinLift.setPower(1);
+            else if(gamepad1.left_bumper)
+                rackPinLift.setPower(-.5);
+            else
+                rackPinLift.setPower(0);
+
             if(gamepad2.right_bumper)
                 spinner.setPower(.5);
             else if(gamepad2.left_bumper)
@@ -89,16 +102,18 @@ public class PaceSilverKnightsV2 extends LinearOpMode {
         }
     }
 
-    public static void keepPosition(double power){
+    public static void keepPosition(){
         armLiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armLiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armLiftLeft.setPosition(armLiftLeft.getPosition());
-        armLiftRight.setPosition(armLiftRight.getPosition());
+        armLiftLeft.setTargetPosition(armLiftLeft.getCurrentPosition());
+        armLiftRight.setTargetPosition(armLiftRight.getCurrentPosition());
         armLiftLeft.setPower(.5);
         armLiftRight.setPower(.5);
     }
 
     public static void loosePosition(){
+        armLiftRight.setPower(0);
+        armLiftLeft.setPower(0);
         armLiftLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         armLiftRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }

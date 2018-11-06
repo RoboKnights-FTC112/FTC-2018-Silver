@@ -29,6 +29,11 @@ public class WhitesAutoDepot extends LinearOpMode{
         rearRight = hardwareMap.get(DcMotor.class, "back_right_drive");
         frontLeft = hardwareMap.get(DcMotor.class, "front_left_drive");
         frontRight = hardwareMap.get(DcMotor.class, "front_right_drive");
+
+        rearLeft.setDirection(DcMotor.Direction.REVERSE);
+        rearRight.setDirection(DcMotor.Direction.REVERSE);
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+        frontRight.setDirection(DcMotor.Direction.REVERSE);
         
         //plow servos
         //plowOne = hardwareMap.servo.get("plowOne");
@@ -37,15 +42,15 @@ public class WhitesAutoDepot extends LinearOpMode{
         //plowMotor=hardwareMap.dcMotor.get("plowMotor");
         
         //arm motor
-        DcMotor arm = hardwareMap.get(DcMotor.class, "lowJoint");
+        DcMotor arm = hardwareMap.get(DcMotor.class, "marker_arm");
 
         if(opModeIsActive()){
             //plowOne.setPosition(.5);
             driveForward(0.4,1500);
-            //moveArm(true);
+            moveArm(true);
             sleep(900);
             //plowOne.setPosition(1);
-            //moveArm(false);
+            moveArm(false);
             turnRight(0.4,975);
             driveForward(1,3000);
         }
@@ -65,20 +70,20 @@ public class WhitesAutoDepot extends LinearOpMode{
     }
     public void moveArm(boolean pos){
         if(pos){
-            armLiftLeft.setPower(-0.6);
-            armLiftRight.setPower(-0.6);
+            arm.setPower(-0.6);
+            arm.setPower(-0.6);
             sleep(400);
         } else {
-            plowMotor.setPower(0.6);
+            arm.setPower(0.6);
             sleep(650);
         }
-        plowMotor.setPower(0);
+        arm.setPower(0);
     }
     public void turnRight(double speed, int time){
-        rearLeft.setPower(-speed);
-        rearRight.setPower(-speed);
-        frontLeft.setPower(-speed);
-        frontRight.setPower(-speed);
+        rearLeft.setPower(speed);
+        rearRight.setPower(speed);
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
         sleep(time);
         rearLeft.setPower(0);
         rearRight.setPower(0);
