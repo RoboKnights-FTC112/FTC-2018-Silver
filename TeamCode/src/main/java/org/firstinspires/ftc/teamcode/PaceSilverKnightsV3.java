@@ -44,11 +44,19 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
 
         while (opModeIsActive()) {
 
+            if (gamepad1.dpad_left) {
+                leftFront.setPower(-.5);
+                rightFront.setPower(-.5);
+            } else if (gamepad1.dpad_right) {
+                leftFront.setPower(.5);
+                rightFront.setPower(.5);
+            } else {
             leftDrive.setPower(-gamepad1.left_stick_y+gamepad1.right_stick_x);
             rightDrive.setPower(-gamepad1.left_stick_y-gamepad1.right_stick_x);
 
             leftFront.setPower(gamepad1.right_stick_x);
             rightFront.setPower(gamepad1.right_stick_x);
+            }
 
             //Telemetry to phone
             telemetry.addData("Runtime", "" + runtime);
