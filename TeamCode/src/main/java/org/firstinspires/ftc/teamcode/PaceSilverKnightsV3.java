@@ -24,6 +24,9 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
     private static DcMotor rightDrive = null;
     private static DcMotor leftFront = null;
     private static DcMotor rightFront = null;
+
+    //Lift Arm
+    private static DcMotor armLift = null;
    
     @Override
     public void runOpMode() {
@@ -34,7 +37,9 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
         leftFront = hardwareMap.get(DcMotor.class, "left_front");
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");        
+        rightFront = hardwareMap.get(DcMotor.class, "right_front");
+
+        armLift = hardwareMap.get(DcMotor.class, "arm_lift");
 
         //Left drives
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -57,6 +62,13 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
             leftFront.setPower(gamepad1.right_stick_x);
             rightFront.setPower(gamepad1.right_stick_x);
             }
+
+            if(gamepad1.right_bumper)
+                armLift.setPower(.5);
+            else if(gamepad1.left_bumper)
+                armLift.setPower(-.25);
+            else
+                armLift.setPower(0);
 
             //Telemetry to phone
             telemetry.addData("Runtime", "" + runtime);
