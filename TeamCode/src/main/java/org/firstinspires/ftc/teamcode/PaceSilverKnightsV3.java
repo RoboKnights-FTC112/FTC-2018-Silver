@@ -17,32 +17,43 @@ import com.qualcomm.robotcore.util.Range;
 //@Disabled
 public class PaceSilverKnightsV3 extends LinearOpMode {
 
-    // Declare OpMode members.
+    // Declare OpMode members. 
     private ElapsedTime runtime = new ElapsedTime();
     //Driving motors
-    private static DcMotor leftDrive = null;
-    private static DcMotor rightDrive = null;
+    private static DcMotor backLeft = null;
+    private static DcMotor backRight = null;
     private static DcMotor leftFront = null;
     private static DcMotor rightFront = null;
 
+    private static DcMotor strafe = null;
+
     //Lift Arm
     private static DcMotor armLift = null;
+
+    //Score arm
+    private static DcMotor armScore = null;
+
    
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        backLeft = hardwareMap.get(DcMotor.class, "left_drive");
+        backRight = hardwareMap.get(DcMotor.class, "right_drive");
 
         leftFront = hardwareMap.get(DcMotor.class, "left_front");
         rightFront = hardwareMap.get(DcMotor.class, "right_front");
 
+        strafe = hardwareMap.get(DcMotor.class, "strafe_wheel");
+
         armLift = hardwareMap.get(DcMotor.class, "arm_lift");
 
+        armScore = hardwareMap.get(DcMotor.class, "arm_score");
+
         //Left drives
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
@@ -50,18 +61,24 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
         while (opModeIsActive()) {
 
             if (gamepad1.dpad_left) {
-                leftFront.setPower(-.5);
-                rightFront.setPower(-.5);
+                strafe.setPower(.5);
             } else if (gamepad1.dpad_right) {
-                leftFront.setPower(.5);
-                rightFront.setPower(.5);
+                strafe.setPower(-.5);
             } else {
-            leftDrive.setPower(-gamepad1.left_stick_y+gamepad1.right_stick_x);
-            rightDrive.setPower(-gamepad1.left_stick_y-gamepad1.right_stick_x);
-
-            leftFront.setPower(gamepad1.right_stick_x);
-            rightFront.setPower(gamepad1.right_stick_x);
+                strafe.setPower(0);
             }
+            backLeft.setPower(-gamepad1.left_stick_y+gamepad1.right_stick_x);
+            backRight.setPower(-gamepad1.left_stick_y-gamepad1.right_stick_x);
+            leftFront.setPower(-gamepad1.left_stick_y+gamepad1.right_stick_x);
+            rightFront.setPower(-gamepad1.left_stick_y-gamepad1.right_stick_x);
+
+            if(gamepad2.left_stick_y<0)
+                armScore.setPower(.5);
+            else if(gamepad2.left_stick_y>0)
+                armScore.setPower(-.5);
+            else
+                armScore.setPower(0);
+            
 
             if(gamepad1.right_bumper)
                 armLift.setPower(.5);
@@ -72,7 +89,7 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
 
             //Telemetry to phone
             telemetry.addData("Runtime", "" + runtime);
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftDrive.getPower(), rightDrive.getPower());
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", backLeft.getPower(), backRight.getPower());
             telemetry.update();
         }
     }

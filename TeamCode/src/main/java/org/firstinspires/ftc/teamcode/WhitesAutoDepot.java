@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous
+@Autonomous(name="DepotAuto", group="SilverKnights")
 
 public class WhitesAutoDepot extends LinearOpMode{
     public DcMotor arm;

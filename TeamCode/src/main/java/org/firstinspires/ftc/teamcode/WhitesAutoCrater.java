@@ -5,14 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous
+@Autonomous(name="CraterAuto", group="SilverKnights")
 
 public class WhitesAutoCrater extends LinearOpMode{
     public DcMotor arm;
-    public DcMotor rearLeft;
-    public DcMotor rearRight;
-    public DcMotor frontLeft;
-    public DcMotor frontRight;
+    public DcMotor rearLeft1;
+    public DcMotor rearRight1;
+    public DcMotor frontLeft1;
+    public DcMotor frontRight1;
     
     public DcMotor armLiftLeft;
     public DcMotor armLiftLeft;
@@ -25,10 +25,10 @@ public class WhitesAutoCrater extends LinearOpMode{
         waitForStart();
 
         //wheel motor variables
-        rearLeft = hardwareMap.get(DcMotor.class, "back_left_drive");
-        rearRight = hardwareMap.get(DcMotor.class, "back_right_drive");
-        frontLeft = hardwareMap.get(DcMotor.class, "front_left_drive");
-        frontRight = hardwareMap.get(DcMotor.class, "front_right_drive");
+        rearLeft1 = hardwareMap.get(DcMotor.class, "back_left_drive");
+        rearRight1 = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeft1 = hardwareMap.get(DcMotor.class, "front_left_drive");
+        frontRight1 = hardwareMap.get(DcMotor.class, "front_right_drive");
         
         //plow servos
         //plowOne = hardwareMap.servo.get("plowOne");
@@ -50,15 +50,15 @@ public class WhitesAutoCrater extends LinearOpMode{
     }
     
     public void driveForward(double speed, double time){
-        rearLeft.setPower(-speed);
-        rearRight.setPower(speed);
-        frontLeft.setPower(-speed);
-        frontRight.setPower(speed);
+        rearLeft1.setPower(-speed);
+        rearRight1.setPower(speed);
+        frontLeft1.setPower(-speed);
+        frontRight1.setPower(speed);
         sleep((long)time);
-        rearLeft.setPower(0);
-        rearRight.setPower(0);
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
+        rearLeft1.setPower(0);
+        rearRight1.setPower(0);
+        frontLeft1.setPower(0);
+        frontRight1.setPower(0);
         
     }
     public void moveArm(boolean pos){
@@ -73,14 +73,14 @@ public class WhitesAutoCrater extends LinearOpMode{
         plowMotor.setPower(0);
     }
     public void turnRight(double speed, int time){
-        rearLeft.setPower(-speed);
-        rearRight.setPower(-speed);
-        frontLeft.setPower(-speed);
-        frontRight.setPower(-speed);
+        rearLeft1.setPower(-speed);
+        rearRight1.setPower(-speed);
+        frontLeft1.setPower(-speed);
+        frontRight1.setPower(-speed);
         sleep(time);
-        rearLeft.setPower(0);
-        rearRight.setPower(0);
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
+        rearLeft1.setPower(0);
+        rearRight1.setPower(0);
+        frontLeft1.setPower(0);
+        frontRight1.setPower(0);
     }
 }
