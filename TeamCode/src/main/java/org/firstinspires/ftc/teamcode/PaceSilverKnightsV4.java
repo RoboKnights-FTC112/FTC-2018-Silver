@@ -1,4 +1,4 @@
-//Robotics Code for Pace Academy Team #### Silver - TeleOp v3 - front wheels
+//Robotics Code for Pace Academy Team #### Silver - TeleOp v4 - front wheels
     package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -13,9 +13,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="PaceSilverV3", group="Silver Group")
+@TeleOp(name="PaceSilverV4", group="Silver Group")
 //@Disabled
-public class PaceSilverKnightsV3 extends LinearOpMode {
+public class PaceSilverKnightsV4 extends LinearOpMode {
 
     // Declare OpMode members. 
     private ElapsedTime runtime = new ElapsedTime();
@@ -81,10 +81,10 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
             }
 
             //General driving
-            backLeft.setPower(-gamepad1.left_stick_y+gamepad1.right_stick_x);
-            backRight.setPower(-gamepad1.left_stick_y-gamepad1.right_stick_x);
-            leftFront.setPower(-gamepad1.left_stick_y+gamepad1.right_stick_x);
-            rightFront.setPower(-gamepad1.left_stick_y-gamepad1.right_stick_x);
+            backLeft.setPower((-gamepad1.left_stick_y+gamepad1.right_stick_x));
+            backRight.setPower((-gamepad1.left_stick_y-gamepad1.right_stick_x));
+            leftFront.setPower((-gamepad1.left_stick_y+gamepad1.right_stick_x));
+            rightFront.setPower((-gamepad1.left_stick_y-gamepad1.right_stick_x));
 
             //Controlling the lift
             if(gamepad1.right_bumper)
@@ -97,11 +97,19 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
 
             //Gamepad2:
 
+            //Arm security
+            if(gamepad2.dpad_left) {
+                keepPosition();
+            }
+            if(gamepad2.dpad_right) {
+                loosePosition();
+            }
+
             //Lifting the scoring arm
             if(gamepad2.left_stick_y<0)
-                armScore.setPower(.5);
-            else if(gamepad2.left_stick_y>0)
                 armScore.setPower(-.5);
+            else if(gamepad2.left_stick_y>0)
+                armScore.setPower(.5);
             else
                 armScore.setPower(0);
 
@@ -115,7 +123,7 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
 
             //Opening/closing claw:
             //TODO
-            telemetry.addData("Servo Positions: Left: (%.2f), Right: (%.2f)", claw1.getCurrentPosition(), claw2.getCurrentPosition());
+            telemetry.addData("Servo Positions", "Left: (%.2f), Right: (%.2f)", claw1.getPosition(), claw2.getPosition());
 
 
             //Telemetry to phone
@@ -125,19 +133,14 @@ public class PaceSilverKnightsV3 extends LinearOpMode {
         }
     }
 
-    /*public static void keepPosition(){
-        armLiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armLiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armLiftLeft.setTargetPosition(armLiftLeft.getCurrentPosition());
-        armLiftRight.setTargetPosition(armLiftRight.getCurrentPosition());
-        armLiftLeft.setPower(.5);
-        armLiftRight.setPower(.5);
+    public static void keepPosition(){
+        armLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armLift.setTargetPosition(armLift.getCurrentPosition());
+        armLift.setPower(1);
     }
 
     public static void loosePosition(){
-        armLiftRight.setPower(0);
-        armLiftLeft.setPower(0);
-        armLiftLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        armLiftRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    }*/
+        armLift.setPower(0);
+        armLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
 }

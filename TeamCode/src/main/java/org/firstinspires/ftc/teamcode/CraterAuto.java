@@ -22,7 +22,7 @@ public class CraterAuto extends LinearOpMode {
         backLeft = hardwareMap.get(DcMotor.class, "left_drive");
         backRight = hardwareMap.get(DcMotor.class, "right_drive");
         frontLeft = hardwareMap.get(DcMotor.class, "left_front");
-        frontRight = hardwareMap.get(DcMotor.class, "right_drive");
+        frontRight = hardwareMap.get(DcMotor.class, "right_front");
         
         liftArm = hardwareMap.get(DcMotor.class, "arm_lift");
         
