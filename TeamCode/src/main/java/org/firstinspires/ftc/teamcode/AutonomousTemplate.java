@@ -35,6 +35,8 @@ public class nameOfClass extends LinearOpMode {
         
         if(opModeIsActive()) {
             
+            //Write commands here!
+
         }
     }
     
