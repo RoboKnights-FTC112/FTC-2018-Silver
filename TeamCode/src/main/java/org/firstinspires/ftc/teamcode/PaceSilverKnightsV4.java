@@ -106,9 +106,9 @@ public class PaceSilverKnightsV4 extends LinearOpMode {
             }
 
             //Lifting the scoring arm
-            if(gamepad2.left_stick_y<0)
+            if(Math.abs(gamepad2.right_trigger) > 0)
                 armScore.setPower(-.5);
-            else if(gamepad2.left_stick_y>0)
+            else if(Math.abs(gamepad2.left_trigger) > 0)
                 armScore.setPower(.5);
             else
                 armScore.setPower(0);
@@ -122,7 +122,18 @@ public class PaceSilverKnightsV4 extends LinearOpMode {
                 armExtend.setPower(0);
 
             //Opening/closing claw:
-            //TODO
+            if(gamepad2.left_stick_x > 0) {
+                claw1.setPosition(claw1.getPosition() + 5);
+            } else if(gamepad2.left_stick_x < 0) {
+                claw1.setPosition(claw1.getPosition() - 5);
+            }
+            if(gamepad2.right_stick_x > 0) {
+                claw2.setPosition(claw2.getPosition() - 5);
+            } else if(gamepad2.right_stick_x < 0) {
+                claw2.setPosition(claw2.getPosition() + 5);
+            }
+
+
             telemetry.addData("Servo Positions", "Left: (%.2f), Right: (%.2f)", claw1.getPosition(), claw2.getPosition());
 
 
