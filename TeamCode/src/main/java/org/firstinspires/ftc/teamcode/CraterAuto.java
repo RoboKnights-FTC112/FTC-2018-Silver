@@ -45,8 +45,14 @@ public class CraterAuto extends LinearOpMode {
         sleep(time);
         liftArm.setPower(0);
     }
+
     private void strafeLeft(int time) {
         strafeWheel.setPower(.5);
+        sleep(time);
+        strafeWheel.setPower(0);
+    }
+    private void strafeRight(int time) {
+        strafeWheel.setPower(-.5);
         sleep(time);
         strafeWheel.setPower(0);
     }
@@ -62,5 +68,40 @@ public class CraterAuto extends LinearOpMode {
         backRight.setPower(0);
         frontLeft.setPower(0);
         frontRight.setPower(0);
+    }
+    private void moveBackwards(int time) {
+        backLeft.setPower(-.5);
+        backRight.setPower(-.5);
+        frontLeft.setPower(-.5);
+        frontRight.setPower(-.5);
+        
+        sleep(time);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        frontLeft.setPower(0);
+        frontRight.setPower(0);    
+    }
+
+    private void turnRight(int time) {
+        backLeft.setPower(.5);
+        frontLeft.setPower(.5);
+        backRight.setPower(-.5);
+        frontRight.setPower(-.5);
+        sleep(time);
+        backLeft.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        frontRight.setPower(0);        
+    }
+    private void turnLeft(int time) {
+        backLeft.setPower(-.5);
+        frontLeft.setPower(-.5);
+        backRight.setPower(.5);
+        frontRight.setPower(.5);
+        sleep(time);
+        backLeft.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        frontRight.setPower(0); 
     }
 }
