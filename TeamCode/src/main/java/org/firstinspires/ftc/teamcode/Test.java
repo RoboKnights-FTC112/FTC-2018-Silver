@@ -27,7 +27,7 @@ public class nameOfClass extends LinearOpMode {
         liftArm = hardwareMap.get(DcMotor.class, "arm_lift");
 
         strafeWheel = hardwareMap.get(DcMotor.class, "strafe_wheel");
-        //hi
+        //hi aewqewqeqe
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
 
