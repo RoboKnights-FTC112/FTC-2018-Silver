@@ -13,9 +13,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="PaceSilverV4", group="Silver Group")
+@TeleOp(name="PaceSilverV5Blaketesting", group="Silver Group")
 //@Disabled
-public class PaceSilverKnightsV4 extends LinearOpMode {
+public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -122,13 +122,22 @@ public class PaceSilverKnightsV4 extends LinearOpMode {
                 armExtend.setPower(0);
 
             //Opening/closing claw:
-            //TODO
-            telemetry.addData("Servo Positions", "Left: (%.2f), Right: (%.2f)", claw1.getPosition(), claw2.getPosition());
+            if(gamepad2.left_stick_x > 0) {
+                claw1.setPosition(claw1.getPosition() + 5);
+            } else if(gamepad2.left_stick_x < 0) {
+                claw1.setPosition(claw1.getPosition() - 5);
+            }
+            if(gamepad2.right_stick_x > 0) {
+                claw2.setPosition(claw2.getPosition() - 5);
+            } else if(gamepad2.right_stick_x < 0) {
+                claw2.setPosition(claw2.getPosition() + 5);
+            }
 
 
             //Telemetry to phone
             telemetry.addData("Runtime", "" + runtime);
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", backLeft.getPower(), backRight.getPower());
+            telemetry.addData("Servo Positions", "Left: (%.2f), Right: (%.2f)", claw1.getPosition(), claw2.getPosition());
             telemetry.update();
         }
     }
