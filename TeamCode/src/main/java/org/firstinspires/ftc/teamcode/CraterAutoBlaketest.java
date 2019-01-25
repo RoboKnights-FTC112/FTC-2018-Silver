@@ -34,7 +34,7 @@ public class CraterAutoBlaketest extends LinearOpMode {
         waitForStart();
 
         if(opModeIsActive()) {
-            lowerLift(3400);
+            lowerLift(3000);
             strafeLeft(650);
             moveForward(4000);
         }
