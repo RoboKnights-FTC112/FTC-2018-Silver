@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.util.Range;
 //@Disabled
 public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
 
-    // Declare OpMode members.
+    //Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     //Driving motors
     private static DcMotor backLeft = null;
