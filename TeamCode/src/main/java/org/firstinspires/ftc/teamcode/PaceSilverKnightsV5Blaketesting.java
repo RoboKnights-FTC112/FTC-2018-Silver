@@ -1,10 +1,10 @@
-//Robotics Code for Pace Academy Team #### Silver - TeleOp v4 - front wheels
+//Robotics Code for Pace Academy Team 15292 Silver - TeleOp v5 Blaketest - front wheels
     package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import com.qualcomm.robotcore.hardware.Servo;
+//import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -25,18 +25,19 @@ public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
     private static DcMotor leftFront = null;
     private static DcMotor rightFront = null;
 
+    //Strafe wheel
     private static DcMotor strafe = null;
 
     //Lift Arm
     private static DcMotor armLift = null;
 
-    //Score arm
-    private static DcMotor armScore = null;
-    private static DcMotor armExtend = null;
+    //Score arm - commenting out because not using
+    /* private static DcMotor armScore = null;
+    private static DcMotor armExtend = null; */
 
-    //Claw Servos
-    private static Servo claw1 = null;
-    private static Servo claw2 = null;
+    //Claw Servos - commenting out because not using
+    /*private static Servo claw1 = null;
+    private static Servo claw2 = null;*/
 
 
     @Override
@@ -54,11 +55,11 @@ public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
 
         armLift = hardwareMap.get(DcMotor.class, "arm_lift");
 
-        armScore = hardwareMap.get(DcMotor.class, "arm_score");
-        armExtend = hardwareMap.get(DcMotor.class, "arm_extend");
+        /*armScore = hardwareMap.get(DcMotor.class, "arm_score");
+        armExtend = hardwareMap.get(DcMotor.class, "arm_extend");*/
 
-        claw1 = hardwareMap.get(Servo.class, "clawL");
-        claw2 = hardwareMap.get(Servo.class, "clawR");
+        /*claw1 = hardwareMap.get(Servo.class, "clawL");
+        claw2 = hardwareMap.get(Servo.class, "clawR");*/
 
         //Left drives
         backLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -95,7 +96,7 @@ public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
                 armLift.setPower(0);
 
 
-            //Gamepad2:
+        /*    //Gamepad2:
 
             //Arm security
             if(gamepad2.dpad_left) {
@@ -103,9 +104,9 @@ public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
             }
             if(gamepad2.dpad_right) {
                 loosePosition();
-            }
+            } */
 
-            //Lifting the scoring arm
+        /*    //Lifting the scoring arm
             if(gamepad2.left_stick_y<0)
                 armScore.setPower(.5);
             else if(gamepad2.left_stick_y>0)
@@ -119,9 +120,9 @@ public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
             else if(gamepad2.left_bumper)
                 armExtend.setPower(-.5);
             else
-                armExtend.setPower(0);
+                armExtend.setPower(0); */
 
-            //Opening/closing claw:
+          /*  //Opening/closing claw:
             if(gamepad2.left_stick_x > 0) {
                 claw1.setPosition(claw1.getPosition() + 5);
             } else if(gamepad2.left_stick_x < 0) {
@@ -131,13 +132,13 @@ public class PaceSilverKnightsV5Blaketesting extends LinearOpMode {
                 claw2.setPosition(claw2.getPosition() - 5);
             } else if(gamepad2.right_stick_x < 0) {
                 claw2.setPosition(claw2.getPosition() + 5);
-            }
+            } */
 
 
             //Telemetry to phone
             telemetry.addData("Runtime", "" + runtime);
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", backLeft.getPower(), backRight.getPower());
-            telemetry.addData("Servo Positions", "Left: (%.2f), Right: (%.2f)", claw1.getPosition(), claw2.getPosition());
+            //telemetry.addData("Servo Positions", "Left: (%.2f), Right: (%.2f)", claw1.getPosition(), claw2.getPosition());
             telemetry.update();
         }
     }
