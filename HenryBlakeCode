@@ -71,7 +71,7 @@ public class HenryBlakeCode extends LinearOpMode {
                 strafe.setPower(0);
             }
 
-            //General driving
+            //General driving - need to test this
             backLeft.setPower(-(-gamepad1.left_stick_y-gamepad1.right_stick_x));
             backRight.setPower(-(-gamepad1.left_stick_y+gamepad1.right_stick_x));
             leftFront.setPower(-(-gamepad1.left_stick_y-gamepad1.right_stick_x));
