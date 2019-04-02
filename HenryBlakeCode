@@ -1,4 +1,4 @@
-//Henry and Blake code - shooter robot
+//Henry and Blake code - shooter robot code
 
     package org.firstinspires.ftc.robotcontroller.external.samples;
 
@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.util.Range;
 //@Disabled
 public class HenryBlakeCode extends LinearOpMode {
 
-    //Declare OpMode members.
+    //Declare OpMode members
     private ElapsedTime runtime = new ElapsedTime();
     //Driving motors
     private static DcMotor backLeft = null;
@@ -71,13 +71,13 @@ public class HenryBlakeCode extends LinearOpMode {
                 strafe.setPower(0);
             }
 
-            //General driving - need to test this
+            //General driving - stil need to test this
             backLeft.setPower(-(-gamepad1.left_stick_y-gamepad1.right_stick_x));
             backRight.setPower(-(-gamepad1.left_stick_y+gamepad1.right_stick_x));
             leftFront.setPower(-(-gamepad1.left_stick_y-gamepad1.right_stick_x));
             rightFront.setPower(-(-gamepad1.left_stick_y+gamepad1.right_stick_x));
 
-            //Controlling the collector
+            //Controlling the collector - LT for power, LB for reverse
             if (gamepad1.left_trigger) {
               collector.setPower(.5);
             } else if (gamepad1.left_bumper) {
@@ -86,7 +86,7 @@ public class HenryBlakeCode extends LinearOpMode {
               collector.setPower(0);
             }
 
-            //Controlling the Launcher
+            //Controlling the Launcher - RT for power, RB for reverse
             if (gamepad1.right_trigger) {
               launcher.setPower(.5);
             } else if (gamepad1.right_bumper) {
@@ -96,7 +96,7 @@ public class HenryBlakeCode extends LinearOpMode {
             }
 
 
-            //Rotating in place
+            //Rotating in place - b rotate right, x rotate left
             if (gamepad1.b) {
               backLeft.setPower(.5);
               leftFront.setPower(.5);
@@ -117,6 +117,7 @@ public class HenryBlakeCode extends LinearOpMode {
             //Telemetry to phone
             telemetry.addData("Runtime", "" + runtime);
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", backLeft.getPower(), backRight.getPower())
+            telemetry.addData("Mechanisms", "collector (%.2f), launcher (%.2f)", launcher.getPower(), collector.getPower())
             telemetry.update();
         }
     }
